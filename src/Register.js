@@ -5,7 +5,7 @@ import axios  from "./api/axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}/;
 const PWD_REGEX=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL='https://localhost:3000/register';
+// const REGISTER_URL='http://localhost:3100/register';
 
 const Register = () => {
     const userRef= useRef();
@@ -32,15 +32,15 @@ const Register = () => {
      
     useEffect(()=>{
        const result=USER_REGEX.test(user);
-       console.log(result);
-       console.log(user)
+    //    console.log(result);
+    //    console.log(user)
        setValidName(result);
     },[user])
 
     useEffect(()=>{
        const result=PWD_REGEX.test(pwd);
-       console.log(result);
-       console.log(pwd);
+    //    console.log(result);
+    //    console.log(pwd);
        setValidPwd(result);
        const match=pwd ===matchPwd;
        setValidMatch(match);
@@ -59,19 +59,29 @@ const Register = () => {
             return;
         }
         
-        try{
-            const response= await axios.post(REGISTER_URL,JSON.stringify({user,pwd}),{headers: {'Content-Type':'application/json'},withCredentials:true});
+        // try{
+            // const response= await fetch('https://register-login-cbd77-default-rtdb.firebaseio.com/reglogdb.json',
+            // {
+            //     method : "POST",
+            //     headers : {
+            //         "Content-Type" : "application/json",
+            //     },
+            //     body : JSON.stringify({
+            //         user,
+            //         pwd,
+            //     }),
+            // })
             setSuccess(true);
-        }catch(err){
-            if(!err?.response){
-                setErrMsg('No Server Response');
-            }else if(err.response?.status === 409){
-                setErrMsg('Username Taken');
-            } else{
-                setErrMsg('Registration Failed')
-            }
-            errRef.current.focus();
-        }
+        // }catch(err){
+        //     if(!err?.response){
+        //         setErrMsg('No Server Response');
+        //     }else if(err.response?.status === 409){
+        //         setErrMsg('Username Taken');
+        //     } else{
+        //         setErrMsg('Registration Failed')
+        //     }
+        //     errRef.current.focus();
+        // }
     }
    
   return (

@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 
 import axios from './api/axios';
-const LOGIN_URL = 'https://localhost:3100/login';
+// const LOGIN_URL = 'https://localhost:3100/login';
 
 const Login = () => {
     const userRef = useRef();
@@ -23,34 +23,34 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            // setAuth({ user, pwd, roles, accessToken });
+        // try {
+        //     const response = await axios.post(LOGIN_URL,
+        //         JSON.stringify({ user, pwd }),
+        //         {
+        //             headers: { 'Content-Type': 'application/json' },
+        //             withCredentials: true
+        //         }
+        //     );
+        //     console.log(JSON.stringify(response?.data));
+        //     //console.log(JSON.stringify(response));
+        //     const accessToken = response?.data?.accessToken;
+        //     const roles = response?.data?.roles;
+        //     // setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
             setSuccess(true);
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-            } else {
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
-        }
+        // } catch (err) {
+        //     if (!err?.response) {
+        //         setErrMsg('No Server Response');
+        //     } else if (err.response?.status === 400) {
+        //         setErrMsg('Missing Username or Password');
+        //     } else if (err.response?.status === 401) {
+        //         setErrMsg('Unauthorized');
+        //     } else {
+        //         setErrMsg('Login Failed');
+        //     }
+        //     errRef.current.focus();
+        // }
     }
 
     return (
@@ -60,7 +60,7 @@ const Login = () => {
                     <h1>You are logged in!</h1>
                     <br />
                     <p>
-                        <a href="#">Go to Home</a>
+                        <a href="/register">Go to Home</a>
                     </p>
                 </section>
             ) : (
@@ -92,8 +92,8 @@ const Login = () => {
                     <p>
                         Need an Account?<br />
                         <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Sign Up</a>
+                            
+                            <a href="/register">Sign Up</a>
                         </span>
                     </p>
                 </section>
